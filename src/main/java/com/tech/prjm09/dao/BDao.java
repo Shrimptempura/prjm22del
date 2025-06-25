@@ -326,5 +326,25 @@ public class BDao {
 		}
 		return rn;
 	}
+	
+	public void delete(String bid) {
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from replyboard where bid = ?";
+		
+		try {
+			conn = DBCon.getConnection();
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, Integer.parseInt(bid));
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(pstmt);
+			DBUtil.close(conn);
+		}
+	}
 
 }
